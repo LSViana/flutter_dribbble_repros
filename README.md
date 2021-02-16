@@ -4,11 +4,11 @@ This project contains Dribbble designs reproduced in Flutter. They are not real-
 
 ## Done ✅
 
-Nothing to see here. 🥺
+- [Task Manager](https://dribbble.com/shots/15123931-Task-Manager-Mobile-App-Design) by Ghulam Rasool
 
 ## In Progress ⏳
 
-- [Task Manager](https://dribbble.com/shots/15123931-Task-Manager-Mobile-App-Design) by Ghulam Rasool
+Nothing to see here. 🥺
 
 ## To Do 📆
 
