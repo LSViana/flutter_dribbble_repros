@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final yellow = Color.fromARGB(255, 208, 196, 69);
@@ -40,6 +41,7 @@ class TaskManagerHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final mediaQuery = MediaQuery.of(context);
     final customTextTheme = GoogleFonts.nunitoSansTextTheme(
       textTheme,
     );
@@ -89,9 +91,9 @@ class TaskManagerHome extends StatelessWidget {
               ),
               Positioned.fill(
                 child: DraggableScrollableSheet(
-                  initialChildSize: 0.45,
-                  minChildSize: 0.45,
-                  maxChildSize: 0.6,
+                  initialChildSize: 280 / mediaQuery.size.height,
+                  minChildSize: 280 / mediaQuery.size.height,
+                  maxChildSize: 360 / mediaQuery.size.height,
                   builder: (context, scrollController) {
                     return SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
@@ -285,10 +287,10 @@ class TaskManagerHome extends StatelessWidget {
                 ),
               ),
               width: 80,
-              child: Icon(
-                Icons.arrow_right_alt,
-                size: 32,
-                color: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              child: SvgPicture.asset(
+                'assets/task-manager/right-arrow.svg',
+                width: 20,
               ),
             )
           ],
