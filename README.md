@@ -13,3 +13,5 @@ This project contains Dribbble designs reproduced in Flutter. They are not real-
 ## To Do 📆
 
 - [Finance App](https://www.youtube.com/watch?v=QdYukGw2Z5o&ab_channel=TheUltimatePlanet) by Ghulam Rasool
+- [Smart Home](https://dribbble.com/shots/15053328-Smart-Home-Dark-Theme-Design) by Ghulam Rasool
+- [Fitness App](https://dribbble.com/shots/14911895-Fitness-App-Design) by Ghulam Rasool
