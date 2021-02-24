@@ -35,6 +35,7 @@ class FinanceAppHome extends StatelessWidget {
                   _topBar(),
                   Expanded(
                     child: SingleChildScrollView(
+                      clipBehavior: Clip.none,
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 16),
                         child: Column(
@@ -168,26 +169,35 @@ class FinanceAppHome extends StatelessWidget {
 
   Widget _cards() {
     return AspectRatio(
-      aspectRatio: 3 / 2,
+      aspectRatio: 12 / 9,
       child: Container(
-        child: PageView(
+        margin: EdgeInsets.only(bottom: 48),
+        child: Stack(
           clipBehavior: Clip.none,
           children: [
-            _card(
-              primaryColor,
-              Colors.white,
-              CardBrand.visa,
-              '4562 1122 4595 7852',
-              'Lucas Viana',
-              '24/2020',
+            Positioned(
+              left: 48,
+              right: -48,
+              top: 48,
+              bottom: -48,
+              child: _card(
+                primaryColor,
+                Colors.white,
+                CardBrand.visa,
+                '4562 1122 4595 7852',
+                'Lucas Viana',
+                '24/2020',
+              ),
             ),
-            _card(
-              Colors.grey[900],
-              primaryColor,
-              CardBrand.visa,
-              '4562 1122 4595 7852',
-              'Lucas Viana',
-              '24/2020',
+            Positioned.fill(
+              child: _card(
+                Colors.grey[900].withAlpha(128),
+                Colors.white,
+                CardBrand.visa,
+                '4562 1122 4595 7852',
+                'Lucas Viana',
+                '24/2020',
+              ),
             ),
           ],
         ),
@@ -203,58 +213,70 @@ class FinanceAppHome extends StatelessWidget {
     String cardHolder,
     String expiryDate,
   ) {
+    final sigmaBlur = 16.0;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
-          padding: EdgeInsets.all(28),
           margin: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.all(
-              Radius.circular(16),
-            ),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SvgPicture.asset(
-                    'assets/finance-app/card-chip.svg',
-                    color: foregroundColor,
-                    width: constraints.maxWidth * 0.1,
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: sigmaBlur, sigmaY: sigmaBlur),
+              child: Container(
+                padding: EdgeInsets.all(28),
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16),
                   ),
-                  SvgPicture.asset(
-                    'assets/finance-app/visa.svg',
-                    color: foregroundColor,
-                    width: constraints.maxWidth * 0.15,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  Text(
-                    cardNumber,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: foregroundColor,
-                      fontSize: 20,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/finance-app/card-chip.svg',
+                          color: foregroundColor,
+                          width: constraints.maxWidth * 0.1,
+                        ),
+                        SvgPicture.asset(
+                          'assets/finance-app/visa.svg',
+                          color: foregroundColor,
+                          width: constraints.maxWidth * 0.15,
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          cardNumber,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: foregroundColor,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(child: Container()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _cardAttribute(
+                            "Card Holder", cardHolder, foregroundColor),
+                        _cardAttribute(
+                            "Expiry Date", expiryDate, foregroundColor),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              Expanded(child: Container()),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _cardAttribute("Card Holder", cardHolder, foregroundColor),
-                  _cardAttribute("Expiry Date", expiryDate, foregroundColor),
-                ],
-              ),
-            ],
+            ),
           ),
         );
       },
