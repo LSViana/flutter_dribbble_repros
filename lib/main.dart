@@ -1,4 +1,5 @@
 import 'package:dribbble_repros/file_manager/home.dart';
+import 'package:dribbble_repros/finance_app/home.dart';
 import 'package:dribbble_repros/task_manager/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,6 +45,13 @@ class App extends StatelessWidget {
             'https://cdn.dribbble.com/users/1615584/screenshots/14729154/media/4998df712db07116bbcaff295a73cc3c.jpg?compress=1&resize=1000x750',
         pageBuilder: () => FileManagerHome(),
       ),
+      new DribbbleReproduction(
+        title: 'Finance App',
+        authorName: 'Ghulam Rasool',
+        previewImageUrl:
+            'https://cdn.dribbble.com/users/1615584/screenshots/14038579/media/852e5fd6b106616e00e78c25870041d1.jpg',
+        pageBuilder: () => FinanceAppHome(),
+      )
     ];
 
     return Container(
