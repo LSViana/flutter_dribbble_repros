@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,17 +23,86 @@ class FinanceAppBalance extends StatelessWidget {
         child: Scaffold(
           body: Container(
             color: backgroundColor,
-            padding: EdgeInsets.all(12),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  _topBar(),
-                  _yourBalanceHeader(),
-                  _yourBalanceBody(),
-                ],
-              ),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12),
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        _topBar(),
+                        _yourBalanceHeader(),
+                        _yourBalanceBody()
+                      ],
+                    ),
+                  ),
+                ),
+                _yourBalanceChart()
+              ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _yourBalanceChart() {
+    return Container(
+      child: AspectRatio(
+        aspectRatio: 3 / 1.8,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Stack(
+              children: [
+                Positioned.fill(
+                  child: CustomPaint(
+                    painter: BalanceChartPainter(),
+                  ),
+                ),
+                Positioned(
+                  left: constraints.maxWidth * .22,
+                  bottom: constraints.maxHeight * .3,
+                  child: Container(
+                    height: 16,
+                    width: 16,
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 3,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: constraints.maxWidth * .13,
+                  bottom: constraints.maxHeight * .45,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[900],
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                        bottomLeft: Radius.circular(16),
+                      ),
+                    ),
+                    child: Text(
+                      '5 June',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -144,5 +215,83 @@ class FinanceAppBalance extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class BalanceChartPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var path = Path();
+    path.moveTo(0, size.height / 1.05);
+    // Point 1
+    path.cubicTo(
+      size.width / 6,
+      size.height / 1.05,
+      size.width / 8,
+      size.height / 1.5,
+      size.width / 4,
+      size.height / 1.5,
+    );
+    // Point 2
+    path.cubicTo(
+      size.width / 3,
+      size.height / 1.5,
+      size.width / 3,
+      size.height / 1.1,
+      size.width / 2,
+      size.height / 1.1,
+    );
+    // Point 3
+    path.cubicTo(
+      size.width / 1.5,
+      size.height / 1.1,
+      size.width / (4 / 3),
+      size.height / 2.25,
+      size.width / (10 / 9),
+      size.height / 2.25,
+    );
+    // Point 4
+    path.cubicTo(
+      size.width / 1.06,
+      size.height / 2.25,
+      size.width / 1.02,
+      size.height / 2,
+      size.width,
+      size.height / 1.75,
+    );
+
+    var shadowPath = Path();
+    shadowPath.addPath(path, Offset.zero);
+    shadowPath.lineTo(size.width, size.height);
+    shadowPath.lineTo(0, size.height);
+    shadowPath.close();
+
+    canvas.drawPath(
+      shadowPath,
+      Paint()
+        ..color = Colors.red
+        ..shader = ui.Gradient.linear(
+          Offset.zero,
+          Offset(0, size.height),
+          [
+            primaryColor,
+            primaryColor.withAlpha(10),
+          ],
+        ),
+    );
+
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = primaryColor
+        ..strokeWidth = 4
+        ..strokeCap = StrokeCap.round
+        ..style = PaintingStyle.stroke,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
