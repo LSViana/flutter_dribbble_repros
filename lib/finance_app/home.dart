@@ -35,7 +35,7 @@ class FinanceAppHome extends StatelessWidget {
                   _topBar(),
                   Expanded(
                     child: SingleChildScrollView(
-                      clipBehavior: Clip.none,
+                      clipBehavior: Clip.hardEdge,
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 16),
                         child: Column(
@@ -176,8 +176,8 @@ class FinanceAppHome extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Positioned(
-              left: 48,
-              right: -48,
+              left: 0,
+              right: 0,
               top: 48,
               bottom: -48,
               child: _card(
@@ -332,7 +332,7 @@ class FinanceAppHome extends StatelessWidget {
   }
 
   Widget _topBar() {
-    return Padding(
+    return Container(
       padding: EdgeInsets.all(12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
