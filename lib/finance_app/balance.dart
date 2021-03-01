@@ -37,11 +37,124 @@ class FinanceAppBalance extends StatelessWidget {
                     ),
                   ),
                 ),
-                _yourBalanceChart()
+                _yourBalanceChart(),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        _periodSelector(),
+                        SizedBox(height: 16),
+                        _yourBalanceOverview(),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _yourBalanceOverview() {
+    return Column(
+      children: [
+        _balanceOverviewItem('Income', '75%', Icons.arrow_downward),
+        _balanceOverviewItem('Outcome', '25%', Icons.arrow_upward),
+      ],
+    );
+  }
+
+  Widget _balanceOverviewItem(
+      String title, String variation, IconData iconData) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.grey[700],
+            ),
+          ),
+          Row(
+            children: [
+              Text(
+                variation,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Icon(
+                iconData,
+                color: Colors.white,
+                size: 16,
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _periodSelector() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
+          child: Text(
+            'Apr to Jun',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        _periodItem('1', 'Month'),
+        _periodItem('6', 'Month'),
+        _periodItem('1', 'Year'),
+      ],
+    );
+  }
+
+  Widget _periodItem(String amount, String unit) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 7.5),
+      decoration: BoxDecoration(
+        color: Colors.grey[900],
+        borderRadius: BorderRadius.all(
+          Radius.circular(16),
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            amount,
+            style: TextStyle(
+              color: Colors.grey[800],
+            ),
+          ),
+          Text(
+            unit,
+            style: TextStyle(
+              color: Colors.grey[800],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -94,7 +207,7 @@ class FinanceAppBalance extends StatelessWidget {
                     child: Text(
                       '5 June',
                       style: TextStyle(
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
                     ),
