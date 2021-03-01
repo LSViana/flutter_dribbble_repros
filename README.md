@@ -6,10 +6,11 @@ This project contains Dribbble designs reproduced in Flutter. They are not real-
 
 - [Task Manager](https://dribbble.com/shots/15123931-Task-Manager-Mobile-App-Design) by Ghulam Rasool
 - [File Manager](https://dribbble.com/shots/14729154-File-Manager-App-UX-UI-Design) by Ghulam Rasool
+- [Finance App](https://www.youtube.com/watch?v=QdYukGw2Z5o&ab_channel=TheUltimatePlanet) by Ghulam Rasool
 
 ## In Progress ⏳
 
-- [Finance App](https://www.youtube.com/watch?v=QdYukGw2Z5o&ab_channel=TheUltimatePlanet) by Ghulam Rasool
+Nothing to see here. 🤷‍♂️
 
 ## To Do 📆
 

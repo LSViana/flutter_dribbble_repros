@@ -22,35 +22,38 @@ class FinanceAppBalance extends StatelessWidget {
         value: SystemUiOverlayStyle.light,
         child: Scaffold(
           body: Container(
+            constraints: BoxConstraints.expand(),
             color: backgroundColor,
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(12),
-                  child: SafeArea(
-                    child: Column(
-                      children: [
-                        _topBar(),
-                        _yourBalanceHeader(),
-                        _yourBalanceBody()
-                      ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(12),
+                    child: SafeArea(
+                      child: Column(
+                        children: [
+                          _topBar(),
+                          _yourBalanceHeader(),
+                          _yourBalanceBody()
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                _yourBalanceChart(),
-                Container(
-                  padding: EdgeInsets.all(12),
-                  child: SafeArea(
-                    child: Column(
-                      children: [
-                        _periodSelector(),
-                        SizedBox(height: 16),
-                        _yourBalanceOverview(),
-                      ],
+                  _yourBalanceChart(),
+                  Container(
+                    padding: EdgeInsets.all(12),
+                    child: SafeArea(
+                      child: Column(
+                        children: [
+                          _periodSelector(),
+                          SizedBox(height: 16),
+                          _yourBalanceOverview(),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
